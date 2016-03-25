@@ -73,23 +73,21 @@
 						.replace(/{{h3}}/g, data[i].h3)
 					var _html_ctrl = tpl_ctrl
 						.replace(/{{index}}/g, data[i].img)
-						
 					out_main.push(_html_main)
 					out_ctrl.push(_html_ctrl)
 				}
 				//3.4 回写
 				g('template_main').innerHTML = out_main.join('');
 				g('template_ctrl').innerHTML = out_ctrl.join('');
-				
 				//7增加main_background 解决闪白问题
 				g('template_main').innerHTML += tpl_main
-						.replace(/{{index}}/g, '{{index}}')
-						.replace(/{{h2}}/g, data[i].h2)
-						.replace(/{{h3}}/g, data[i].h3);										
+					.replace(/{{index}}/g, '{{index}}')
+					.replace(/{{h2}}/g, data[i].h2)
+					.replace(/{{h3}}/g, data[i].h3);
 				g('main_{{index}}').id = 'main_background';
 			}
 			//5幻灯片切换
-			function switchSlider(n){
+			function switchSlider(n) {
 				//5.1获得 要展示的幻灯片、按钮
 				var main = g('main_' + n);
 				var ctrl = g('ctrl_' + n);
@@ -97,39 +95,32 @@
 				var clear_main = g('.main-i');
 				var clear_ctrl = g('.ctrl-i');
 				//5.3清除_active
-				for(i = 0 ; i < clear_ctrl.length; i++ ){
-					clear_main[i].className = clear_main[i].className.replace(' main-i_active','');
-					clear_ctrl[i].className = clear_ctrl[i].className.replace(' ctrl-i_active','');
-				}				
+				for (i = 0; i < clear_ctrl.length; i++) {
+					clear_main[i].className = clear_main[i].className.replace(' main-i_active', '');
+					clear_ctrl[i].className = clear_ctrl[i].className.replace(' ctrl-i_active', '');
+				}
 				//5.3添加_active
 				main.className += ' main-i_active'
-				ctrl.className += ' ctrl-i_active'	
-				
-				//7.2 切换是复制上一张幻灯片到
-				setTimeout(function(){
+				ctrl.className += ' ctrl-i_active'
+					//7.2 切换是复制上一张幻灯片到
+				setTimeout(function() {
 					g('main_background').innerHTML = main.innerHTML;
-				},1500)
-				
-				
+				}, 1500)
 			}
-			
 			//6动态调整图片高度
-			function movePictures (){
+			function movePictures() {
 				var pics = g('.picture');
-				
-				for( i=0; i<pics.length; i++){
-					pics[i].style.marginTop = - (pics[i].clientHeight / 2) + 'px'
+				for (i = 0; i < pics.length; i++) {
+					pics[i].style.marginTop = -(pics[i].clientHeight / 2) + 'px'
 				}
 			}
-			
 			//4定义加载完成
 			window.onload = function() {
 				addSliders();
 				switchSlider(1);
-				
-				setTimeout(function(){
-					movePictures ()
-					},100)
+				setTimeout(function() {
+					movePictures()
+				}, 100)
 			}
 		</script>
 	</body>

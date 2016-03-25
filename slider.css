@@ -14,6 +14,7 @@
 
 .slider .main .main-i img {
 	width: 100%;
+	height: 100%;
 	position: absolute;
 	left: 0;
 	top: 50%;
@@ -120,6 +121,11 @@
 
 #main_background {
 	z-index: 1;
+}
+
+.bg_main {
+	height: 100%;
+	background-size: 100% 100%;
 }
 
 .slider .main .main-i_active h2,

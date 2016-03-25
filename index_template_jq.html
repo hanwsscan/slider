@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="slider.css" /> </head>
+
+	<body>
+		<div class="slider">
+			<div class="main" id="template_main"></div>
+			<div class="ctrl" id="template_ctrl"></div>
+		</div>
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+		<script>
+			//1数据定义，实际生产环境由后台给出
+			var data = [{
+				img: '1.jpg',
+				h2: "标题标题",
+				h3: "内容内容内容内容内容内容"
+			}, {
+				img: '2.jpg',
+				h2: "标题标题",
+				h3: "内容内容内容内容内容内容"
+			}, {
+				img: '3.jpg',
+				h2: "标题标题",
+				h3: "内容内容内容内容内容内容"
+			}, {
+				img: '4.jpg',
+				h2: "标题标题",
+				h3: "内容内容内容内容内容内容"
+			}];
+			$(function() {
+				//遍历添加到DOM中
+				$(data).each(function(i) {
+						$('<div class="main-i" id="main_' + i + '"><div class="caption"><h2>' + data[i].h2 + '</h2><h3>' + data[i].h3 + '</h3></div><img src="images/' + data[i].img + '"class="picture" /></div>').appendTo('#template_main');
+						$('<a class="ctrl-i" id="ctrl_' + i + '" href="javascript:;"><img src="images/' + data[i].img + '" /></a>').appendTo('#template_ctrl');
+					})
+					//默认背景
+				$("#template_main").append('<div id="main_background" class="bg_main"></div>')
+				$("#main_background").css({
+						"background": "url(images/" + data[0].img + ")"
+					})
+					//默认显示
+				$(".ctrl-i").eq(0).addClass("ctrl-i_active")
+				$(".main-i").eq(0).addClass("main-i_active")
+					//点击切换
+				$(".ctrl-i").click(function() {
+						var i = $(this).index();
+						$(this).siblings().removeClass("ctrl-i_active");
+						$(this).addClass("ctrl-i_active");
+						$(".main-i").removeClass("main-i_active")
+						$(".main-i").eq(i).addClass("main-i_active")
+						setTimeout(function() {
+							var pic = $(".main-i").eq(i).children("img").attr("src")
+							$(".bg_main").css({
+								"background": "url(" + pic + ")"
+							})
+						}, 2000)
+					})
+					//
+				setTimeout(function() {
+					movePictures()
+				}, 100)
+
+				function movePictures() {
+					var pics = $('.picture');
+					var picsH = $('.picture').height();
+					$(pics).css({
+						"margin-top": -(picsH / 2) + "px"
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>
